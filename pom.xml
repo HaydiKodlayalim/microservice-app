@@ -13,16 +13,18 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.2.1.RELEASE</version>
+        <relativePath/>
     </parent>
 
     <properties>
         <java.version>11</java.version>
-        <spring.cloud.version>Hoxton.RC1</spring.cloud.version>
+        <spring.cloud.version>Hoxton.RELEASE</spring.cloud.version>
     </properties>
 
     <modules>
         <module>account-service</module>
         <module>service-parent</module>
+        <module>config-server</module>
     </modules>
 
     <dependencyManagement>
