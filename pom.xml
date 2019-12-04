@@ -12,7 +12,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.2.1.RELEASE</version>
+        <version>2.2.0.RELEASE</version>
         <relativePath/>
     </parent>
 
@@ -25,6 +25,7 @@
         <module>account-service</module>
         <module>service-parent</module>
         <module>config-server</module>
+        <module>eureka-server</module>
     </modules>
 
     <dependencyManagement>
