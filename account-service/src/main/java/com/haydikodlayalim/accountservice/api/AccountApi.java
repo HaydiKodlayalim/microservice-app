@@ -1,8 +1,10 @@
 package com.haydikodlayalim.accountservice.api;
 
-import com.haydikodlayalim.accountservice.entity.Account;
+import com.haydikodlayalim.accountservice.dto.AccountDto;
 import com.haydikodlayalim.accountservice.service.AccountService;
-import java.util.List;
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Slice;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,32 +15,29 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
-@RequestMapping("account")
 /**
  * localhost:8080/account
  * GET PUT DELETE POST
  */
+@RestController
+@RequestMapping("account")
+@RequiredArgsConstructor
 public class AccountApi {
 
     private final AccountService accountService;
 
-    public AccountApi(AccountService accountService) {
-        this.accountService = accountService;
-    }
-
     @GetMapping("/{id}")
-    public ResponseEntity<Account> get(@PathVariable("id") String id) {
+    public ResponseEntity<AccountDto> get(@PathVariable("id") String id) {
         return ResponseEntity.ok(accountService.get(id));
     }
 
     @PostMapping
-    public ResponseEntity<Account> save(@RequestBody Account account) {
+    public ResponseEntity<AccountDto> save(@RequestBody AccountDto account) {
         return ResponseEntity.ok(accountService.save(account));
     }
 
     @PutMapping
-    public ResponseEntity<Account> update(@PathVariable("id") String id, @RequestBody Account account) {
+    public ResponseEntity<AccountDto> update(@PathVariable("id") String id, @RequestBody AccountDto account) {
         return ResponseEntity.ok(accountService.update(id, account));
     }
 
@@ -48,7 +47,7 @@ public class AccountApi {
     }
 
     @GetMapping
-    public ResponseEntity<List<Account>> getAll() {
-        return ResponseEntity.ok(accountService.findAll());
+    public ResponseEntity<Slice<AccountDto>> getAll(Pageable pageable) {
+        return ResponseEntity.ok(accountService.findAll(pageable));
     }
 }

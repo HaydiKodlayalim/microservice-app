@@ -1,7 +1,21 @@
-version: '2'
+version: '3.1'
 
 services:
   cassandra:
     image: cassandra
     ports:
       - '9042:9042'
+
+  mysql:
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: microservice-app
+
+  elasticsearch:
+    image: elasticsearch:6.8.5
+    ports:
+      - 9200:9200
+      - 9300:9300
+    environment:
+      discovery.type: single-node
