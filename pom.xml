@@ -26,6 +26,7 @@
         <module>service-parent</module>
         <module>config-server</module>
         <module>eureka-server</module>
+        <module>ticket-service</module>
     </modules>
 
     <dependencyManagement>

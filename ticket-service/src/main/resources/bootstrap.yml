@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: ticket-service
+
+  cloud:
+    config:
+      profile: native
+      uri: http://localhost:8888
