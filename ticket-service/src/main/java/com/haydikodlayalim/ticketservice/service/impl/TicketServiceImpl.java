@@ -31,11 +31,11 @@ public class TicketServiceImpl implements TicketService {
     @Transactional
     public TicketDto save(TicketDto ticketDto) {
         // Ticket Entity
-        Ticket ticket = new Ticket();
-        ResponseEntity<AccountDto> accountDtoResponseEntity = accountServiceClient.get(ticketDto.getAssignee());
-
         if (ticketDto.getDescription() == null)
             throw new IllegalArgumentException("Description bos olamaz");
+
+        Ticket ticket = new Ticket();
+        ResponseEntity<AccountDto> accountDtoResponseEntity = accountServiceClient.get(ticketDto.getAssignee());
 
         ticket.setDescription(ticketDto.getDescription());
         ticket.setNotes(ticketDto.getNotes());
