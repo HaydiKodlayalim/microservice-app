@@ -1,4 +1,4 @@
-package com.haydikodlayalim.accountservice.dto;
+package com.haydikodlayalim.client.contract;
 
 import java.util.Date;
 import lombok.AllArgsConstructor;
@@ -21,4 +21,8 @@ public class AccountDto {
     private String email;
 
     private Date birthDate;
+
+    public String getNameSurname() {
+       return this.name + " " + this.surname;
+    }
 }

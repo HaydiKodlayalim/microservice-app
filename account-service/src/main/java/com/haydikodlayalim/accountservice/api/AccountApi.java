@@ -1,7 +1,7 @@
 package com.haydikodlayalim.accountservice.api;
 
-import com.haydikodlayalim.accountservice.dto.AccountDto;
 import com.haydikodlayalim.accountservice.service.AccountService;
+import com.haydikodlayalim.client.contract.AccountDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;

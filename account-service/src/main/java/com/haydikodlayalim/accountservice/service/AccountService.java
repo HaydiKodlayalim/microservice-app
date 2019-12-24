@@ -1,8 +1,8 @@
 package com.haydikodlayalim.accountservice.service;
 
-import com.haydikodlayalim.accountservice.dto.AccountDto;
 import com.haydikodlayalim.accountservice.entity.Account;
 import com.haydikodlayalim.accountservice.repo.AccountRepository;
+import com.haydikodlayalim.client.contract.AccountDto;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
