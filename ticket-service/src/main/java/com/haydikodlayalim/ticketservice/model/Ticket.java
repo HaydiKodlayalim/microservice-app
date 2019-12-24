@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -21,6 +22,7 @@ import org.hibernate.annotations.GenericGenerator;
 @AllArgsConstructor
 public class Ticket extends BaseEntityModel {
 
+    @Id
     @Getter
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
@@ -34,7 +36,7 @@ public class Ticket extends BaseEntityModel {
 
     @Getter
     @Setter
-    @Column(name = "notes", length = 4000)
+    @Column(name = "notes", length = 1000)
     private String notes;
 
     @Getter
@@ -56,7 +58,7 @@ public class Ticket extends BaseEntityModel {
     @Getter
     @Setter
     @Enumerated(EnumType.ORDINAL)
-    @Column(name = "priority_type")
+    @Column(name = "ticket_status")
     private TicketStatus ticketStatus;
 
 }

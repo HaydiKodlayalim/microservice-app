@@ -5,6 +5,16 @@ spring:
   application:
     name: ticket-service
 
+  datasource:
+    url: jdbc:mysql://localhost:3306/microserviceapp
+    username: root
+    password: microservice-app
+  jpa:
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    hibernate:
+      ddl-auto: create
+
 eureka:
   client:
     instance:

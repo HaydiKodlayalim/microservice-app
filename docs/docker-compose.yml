@@ -11,6 +11,8 @@ services:
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: microservice-app
+    ports:
+      - '3306:3306'
 
   elasticsearch:
     image: elasticsearch:6.8.5
