@@ -4,7 +4,6 @@ server:
 spring:
   application:
     name: ticket-service
-
   datasource:
     url: jdbc:mysql://localhost:3306/microserviceapp
     username: root
@@ -14,6 +13,14 @@ spring:
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     hibernate:
       ddl-auto: create
+  rabbitmq:
+    username: haydikodlayalim
+    password: haydikodlayalim
+  cloud:
+    stream:
+      bindings:
+        output:
+          destination: msqueue
 
 eureka:
   client:

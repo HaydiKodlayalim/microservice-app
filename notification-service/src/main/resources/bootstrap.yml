@@ -1,6 +1,6 @@
 spring:
   application:
-    name: ticket-service
+    name: notification-service
 
   cloud:
     config:
@@ -9,5 +9,5 @@ spring:
 
     stream:
       bindings:
-        output:
+        input:
           destination: msqueue
