@@ -57,7 +57,7 @@
                         <image>
                             <name>${project.artifactId}:${project.version}</name>
                             <build>
-                                <from>java:8-jdk-alpine</from>
+                                <from>adoptopenjdk/openjdk11</from>
                                 <entryPoint>
                                     <exec>
                                         <args>java</args>
