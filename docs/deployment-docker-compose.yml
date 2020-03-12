@@ -1,13 +1,13 @@
 version: '3.1'
 
 networks:
-  haydikodlayalim
+  haydikodlayalim:
 
 services:
   # DB and Queue -----------------------
   cassandra:
     image: cassandra
-    container_name: hk-cassandra
+    container_name: hk-cassandra-server
     networks:
       - haydikodlayalim
     ports:
@@ -15,7 +15,7 @@ services:
 
   mysql:
     image: mysql
-    container_name: hk-mysql
+    container_name: hk-mysql-server
     restart: always
     networks:
       - haydikodlayalim
@@ -57,6 +57,7 @@ services:
       - haydikodlayalim
     environment:
       CONFIG_SERVER_URL: http://hk-config-server:8888
+      CASSANDRA_SERVER_HOST: hk-cassandra-server
     ports:
       - '8080:8080'
 
