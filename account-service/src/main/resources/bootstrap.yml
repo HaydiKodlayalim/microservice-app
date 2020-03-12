@@ -1,7 +1,5 @@
 
 spring:
-  profiles:
-    active: ${PROFILE:DEV}
   application:
     name: account-service
 

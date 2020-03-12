@@ -1,6 +1,6 @@
 #https://cloud.spring.io/spring-cloud-gateway/reference/html/
 server:
-  port: ${SERVER_PORT:8888}
+  port: ${SERVER_PORT:8088}
 
 spring:
   application:
