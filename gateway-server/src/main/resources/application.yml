@@ -1,4 +1,7 @@
 #https://cloud.spring.io/spring-cloud-gateway/reference/html/
+server:
+  port: ${SERVER_PORT:8888}
+
 spring:
   application:
     name: api-gateway
@@ -27,13 +30,11 @@ spring:
               args:
                 name: ticket-service
                 fallbackUri: forward:/fb/ticket
-server:
-  port: 8088
 
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://localhost:8500/eureka
+      defaultZone: ${EUREKA_SERVICE_URL:http://localhost:8500}/eureka/
     register-with-eureka: false
   instance:
     preferIpAddress: true

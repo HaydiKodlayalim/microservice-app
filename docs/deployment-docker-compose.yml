@@ -1,0 +1,156 @@
+version: '3.1'
+
+networks:
+  haydikodlayalim
+
+services:
+  # DB and Queue -----------------------
+  cassandra:
+    image: cassandra
+    container_name: hk-cassandra
+    networks:
+      - haydikodlayalim
+    ports:
+      - '9042:9042'
+
+  mysql:
+    image: mysql
+    container_name: hk-mysql
+    restart: always
+    networks:
+      - haydikodlayalim
+    environment:
+      MYSQL_ROOT_PASSWORD: microservice-app
+    ports:
+      - '3306:3306'
+
+  elasticsearch:
+    image: elasticsearch:6.8.5
+    container_name: hk-elasticsearch
+    networks:
+      - haydikodlayalim
+    ports:
+      - 9200:9200
+      - 9300:9300
+    environment:
+      discovery.type: single-node
+
+  msrabbitmq:
+    image: rabbitmq:3-management
+    container_name: hk-msrabbitmq
+    networks:
+      - haydikodlayalim
+    ports:
+      - '5672:5672'
+      - '15672:15672'
+    environment:
+      - RABBITMQ_DEFAULT_USER=haydikodlayalim
+      - RABBITMQ_DEFAULT_PASS=haydikodlayalim
+
+  # Local Services -----------------------
+
+  hk-account-service:
+    image: account-service:10.0.1
+    container_name: hk-account-service
+    restart: always
+    networks:
+      - haydikodlayalim
+    environment:
+      CONFIG_SERVER_URL: http://hk-config-server:8888
+    ports:
+      - '8080:8080'
+
+  hk-ticket-service:
+    image: ticket-service:10.0.1
+    container_name: hk-ticket-service
+    restart: always
+    networks:
+      - haydikodlayalim
+    environment:
+      CONFIG_SERVER_URL: http://hk-config-server:8888
+    ports:
+      - '8080:8080'
+
+  hk-notification-service:
+    image: notification-service:10.0.1
+    container_name: hk-notification-service
+    restart: always
+    networks:
+      - haydikodlayalim
+    environment:
+      CONFIG_SERVER_URL: http://hk-config-server:8888
+    ports:
+      - '8080:8080'
+
+  # System Services -----------------------
+  hk-config-server:
+    image: config-server:10.0.1
+    container_name: hk-config-server
+    restart: always
+    networks:
+      - haydikodlayalim
+    environment:
+      CONFIG_SERVER_URL: http://config-server:8888
+      SERVER_PORT: 8888
+    ports:
+      - '8888:8888'
+
+  hk-eureka-server:
+    image: eureka-server:10.0.1
+    container_name: hk-eureka-server
+    restart: always
+    networks:
+      - haydikodlayalim
+    environment:
+      CONFIG_SERVER_URL: http://hk-config-server:8888
+      SERVER_PORT: 8887
+    ports:
+      - '8887:8887'
+
+  hk-admin-server:
+    image: admin-server:10.0.1
+    container_name: hk-admin-server
+    restart: always
+    networks:
+      - haydikodlayalim
+    environment:
+      EUREKA_SERVICE_URL: http://hk-eureka-server:8888
+      SERVER_PORT: 8886
+    ports:
+      - '8886:8886'
+
+  hk-gateway-server:
+    image: gateway-server:10.0.1
+    container_name: hk-gateway-server
+    restart: always
+    networks:
+      - haydikodlayalim
+    environment:
+      EUREKA_SERVICE_URL: http://hk-eureka-server:8888
+      SERVER_PORT: 8885
+    ports:
+      - '8885:8885'
+
+  hk-hystrix-dashboard:
+    image: hystrix-dashboard:10.0.1
+    container_name: hk-hystrix-dashboard
+    restart: always
+    networks:
+      - haydikodlayalim
+    environment:
+      EUREKA_SERVICE_URL: http://hk-eureka-server:8888
+      SERVER_PORT: 8884
+    ports:
+      - '8884:8884'
+
+  hk-zipkin-server:
+    image: zipkin-server:10.0.1
+    container_name: hk-zipkin-server
+    restart: always
+    networks:
+      - haydikodlayalim
+    environment:
+      EUREKA_SERVICE_URL: http://hk-eureka-server:8888
+      SERVER_PORT: 8883
+    ports:
+      - '8883:8883'
