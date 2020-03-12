@@ -5,29 +5,29 @@ spring:
   application:
     name: ticket-service
   datasource:
-    url: jdbc:mysql://localhost:3306/microserviceapp
-    username: root
-    password: microservice-app
+    url: ${MYSQL_URL:jdbc:mysql://localhost:3306/microserviceapp}
+    username: ${MYSQL_URL:root}
+    password: ${MYSQL_URL:microservice-app}
   jpa:
     database: mysql
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
   rabbitmq:
-    username: haydikodlayalim
-    password: haydikodlayalim
+    username: ${MYSQL_USERNAME:haydikodlayalim}
+    password: ${MYSQL_PASSWORD:haydikodlayalim}
   cloud:
     stream:
       bindings:
         output:
           destination: msqueue
   zipkin:
-    base-url: http://localhost:9411/
+    base-url: ${ZIPKIN_SERVER_URL:http://localhost:9411/}
 
   boot:
     admin:
       client:
-        url: http://localhost:8508
+        url: ${SPRING_BOOT_ADMIN_SERVER_URL:http://localhost:8508}
 
 management:
   endpoints:
@@ -38,6 +38,6 @@ management:
 eureka:
   client:
     instance:
-      hostname: localhost
+      hostname: ${EUREKA_SERVER_HOST:localhost}
     serviceUrl:
-      defaultZone: http://localhost:8500/eureka/
+      defaultZone: ${EUREKA_SERVER_URL:http://localhost:8500/eureka/}
