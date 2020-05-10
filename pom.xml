@@ -16,6 +16,19 @@
         <relativePath/>
     </parent>
 
+    <developers>
+        <developer>
+            <id>temelt</id>
+            <name>Taner TEMEL</name>
+            <email>taner.temel@outlook.com</email>
+            <roles>
+                <role>
+                    Sr. Software Engineer
+                </role>
+            </roles>
+        </developer>
+    </developers>
+
     <properties>
         <java.version>11</java.version>
         <spring.cloud.version>Hoxton.RELEASE</spring.cloud.version>
