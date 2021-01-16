@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: microservice-app-eureka
+  labels:
+    app: microservice-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: microservice-app
+  template:
+    metadata:
+      labels:
+        app: microservice-app
+    spec:
+      containers:
+        - name: eureka-server
+          image: haydikodlayalim/eureka-server:10.0.1
+          env:
+            - name: CONFIG_SERVER_URL
+              value: http://config-server-svc
+          ports:
+            - containerPort: 8500
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: eureka-server-svc
+spec:
+  selector:
+    app: microservice-app
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: 8500

@@ -1,0 +1,20 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: microservice-app-external-lb
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+    - host: microserviceapp.local
+      http:
+        paths:
+          - pathType: Prefix
+            path: /*
+            backend:
+              service:
+                name: eureka-server-svc
+                port:
+                  number: 80
+
+# external-lb den sonra /etc/hosts icersinde {minikube ip} microserviceapp.local tanimi olmalidir
